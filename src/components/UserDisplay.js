@@ -1,17 +1,16 @@
 import React from "react";
-import SingleUserDisplay from "./SingleUserDisplay/SingleUserDisplay";
+import UserDisplayList from "./AddedUserDisplay/UserDisplayList";
 
 function UserDisplay(props) {
-  // const users = [props.users];
-  // console.log(props.users.age);
-  // <div>{props.users.username}  {props.users.age}</div>
+  const deleteHandler = () => {
+    props.onDeleteUser(props.id);
+  };
 
   return (
     <ul>
-      
-      <SingleUserDisplay users={props.users} />
-        
-      
+      <li>
+      <UserDisplayList onClick={deleteHandler} users={props.users} />
+      </li>
     </ul>
   );
 }

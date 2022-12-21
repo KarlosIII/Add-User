@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import UserInfo from "./components/UserInfoInput";
+import UserInfoInput from "./components/UserInfoInput";
 
-import UserDisplay from "./components/UserDisplay";
+import UserDisplayList from "./components/AddedUserDisplay/UserDisplayList";
 
-function App(props) {
+function App() {
   const [users, setUsers] = useState([
     { username: "George", age: "23", id: "u1" },
     { username: "Annita", age: "99", id: "u2" },
@@ -18,17 +18,24 @@ function App(props) {
         age: enteredAge,
         id: Math.random().toString(),
       });
-      console.log(updateUsers);
       return updateUsers;
     });
   };
 
+  const deleteUserHandler = userId => {
+    setUsers(prevUsers => {
+      const updateUsers = prevUsers.filter(user => user.id !== userId);
+      return updateUsers;
+    });
+  };
+
+
   return (
     <div>
       <div>Space</div>
-      <UserInfo />
+      <UserInfoInput onAddUser={addUserHandler} />
 
-      <UserDisplay users={users} onAddUser={addUserHandler} />
+      <UserDisplayList onDeleteUser={deleteUserHandler} users={users} />
     </div>
   );
 }
