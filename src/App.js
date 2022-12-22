@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import UserInfoInput from "./components/UserInfoInput";
-
 import UserDisplayList from "./components/AddedUserDisplay/UserDisplayList";
+import OverlayError from "./components/OverlayError";
 
 function App() {
   const [users, setUsers] = useState([
@@ -22,19 +22,17 @@ function App() {
     });
   };
 
-  const deleteUserHandler = userId => {
-    setUsers(prevUsers => {
-      const updateUsers = prevUsers.filter(user => user.id !== userId);
+  const deleteUserHandler = (userId) => {
+    setUsers((prevUsers) => {
+      const updateUsers = prevUsers.filter((user) => user.id !== userId);
       return updateUsers;
     });
   };
 
-
   return (
     <div>
-      <div>Space</div>
       <UserInfoInput onAddUser={addUserHandler} />
-
+      
       <UserDisplayList onDeleteUser={deleteUserHandler} users={users} />
     </div>
   );
